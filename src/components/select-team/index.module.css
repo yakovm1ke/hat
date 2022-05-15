@@ -1,0 +1,41 @@
+.teamsConfigurations {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+
+.teamsConfiguration {
+	display: flex;
+	width: 100%;
+	box-sizing: border-box;
+	align-items: center;
+	padding: 8px;
+	border: 2px solid var(--gray);
+	border-radius: 16px;
+}
+
+.selected {
+	border-color: var(--green);
+	background-color: var(--green);
+}
+
+.teamsPlayers {
+	display: flex;
+	flex-direction: column;
+	color: var(--gray);
+	font-size: 20px;
+}
+
+.selected .teamsPlayers {
+	color: var(--white);
+}
+
+.teamsConfiguration:hover {
+	cursor: pointer;
+}
+
+.teamsCount {
+	width: 60px;
+	font-size: 40px;
+	text-align: center;
+}

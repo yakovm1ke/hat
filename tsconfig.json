@@ -4,13 +4,24 @@
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
+    "noEmit": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
+    "strictPropertyInitialization": false,
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "customTemplate": "@/types/custom-template.js"
+        }
+      }
+    ],
     "sourceMap": true,
     "baseUrl": ".",
     "types": [

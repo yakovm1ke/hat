@@ -1,0 +1,25 @@
+.bigTitle {
+	composes: bigTitle from "@/assets/styles.module.css";
+}
+
+.block {
+	composes: block from "@/assets/styles.module.css";
+}
+
+.mainText {
+	composes: mainText from "@/assets/styles.module.css";
+}
+
+.subText {
+	composes: subText from "@/assets/styles.module.css";
+}
+
+.highlightedText {
+	composes: subText from "@/assets/styles.module.css";
+}
+
+.button {
+	composes: button from "@/assets/styles.module.css";
+	border: 2px solid var(--green);
+	background-color: var(--green);
+}

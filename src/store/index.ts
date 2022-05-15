@@ -1,17 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {createVuexStore} from 'vuex-simple'
+import {HatStore} from './store'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+const instance = new HatStore()
+
+export default createVuexStore(instance, {
+	strict: true,
+	modules: {},
+	plugins: []
+});
