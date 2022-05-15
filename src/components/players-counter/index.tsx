@@ -8,11 +8,11 @@ import styles from './index.module.css'
 export class PlayersCounter extends VueComponent {
 	public store: HatStore = useStore(this.$store)
 
-	get playersCount() {
-		return this.store.playersCount
+	get totalPlayers() {
+		return this.store.totalPlayers
 	}
 
-	set playersCount(value: number) {
+	set totalPlayers(value: number) {
 		this.store.setPlayersCount(value)
 	}
 
@@ -21,18 +21,18 @@ export class PlayersCounter extends VueComponent {
 			<div class={styles.row}>
 				<button
 					class={styles.button}
-					onClick={() => this.playersCount--}
+					onClick={() => this.totalPlayers--}
 				>
 					-
 				</button>
 				<button
 					class={styles.button}
-					onClick={() => this.playersCount++}
+					onClick={() => this.totalPlayers++}
 				>
 					+
 				</button>
 				<div class={styles.number}>
-					{this.playersCount}
+					{this.totalPlayers}
 				</div>
 			</div>
 		)

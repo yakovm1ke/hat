@@ -10,14 +10,6 @@
 	composes: mainText from "@/assets/styles.module.css";
 }
 
-.subText {
-	composes: subText from "@/assets/styles.module.css";
-}
-
-.button {
-	composes: button from "@/assets/styles.module.css";
-}
-
 .submitButton {
 	composes: submitButton from "@/assets/styles.module.css";
 }

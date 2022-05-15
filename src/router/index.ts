@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import { HomeView } from '@/views/home-view'
 import { StartView } from '@/views/start-view'
+import { InputWordsView } from '@/views/input-words-view'
+import { ErrorView } from '@/views/error-view'
 
 Vue.use(VueRouter)
 
@@ -15,6 +17,16 @@ const routes: Array<RouteConfig> = [
 		path: '/start',
 		name: 'start',
 		component: StartView
+	},
+	{
+		path: '/input-words',
+		name: 'input-words',
+		component: InputWordsView
+	},
+	{
+		path: '/error',
+		name: 'error',
+		component: ErrorView
 	},
 	// {
 	// 	path: '/about',

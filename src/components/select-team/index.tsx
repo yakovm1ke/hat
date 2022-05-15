@@ -8,8 +8,8 @@ import styles from './index.module.css'
 export class SelectTeam extends VueComponent {
 	public store: HatStore = useStore(this.$store)
 
-	get playersCount() {
-		return this.store.playersCount
+	get totalPlayers() {
+		return this.store.totalPlayers
 	}
 
 	get teamsConfiguration() {
@@ -28,7 +28,7 @@ export class SelectTeam extends VueComponent {
 		return this.teamsConfiguration?.teamsCount === teamsConfiguration.teamsCount
 	}
 
-	@Watch('playersCount')
+	@Watch('totalPlayers')
 	resetTeamsConfiguration() {
 		this.teamsConfiguration = undefined
 	}

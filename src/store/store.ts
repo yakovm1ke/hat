@@ -5,20 +5,25 @@ export interface ITeamConfiguration {
 	teamsPlayers: number[]
 }
 
+export interface IPlayerWords {
+	name: string
+	words: string[]
+}
+
 export class HatStore {
 	@State()
-	playersCount = 4
+	totalPlayers = 4
 
 	@Mutation()
 	setPlayersCount(value: number) {
 		if (value < 4) return
 		if (value > 9) return
-		this.playersCount = value
+		this.totalPlayers = value
 	}
 
 	@Getter()
 	get teamsConfigurations(): ITeamConfiguration[] {
-		switch(this.playersCount) {
+		switch(this.totalPlayers) {
 		case 4:
 			return [
 				{
@@ -111,5 +116,21 @@ export class HatStore {
 		if (value < 4) return
 		if (value > 6) return
 		this.playerWordsCount = value
+	}
+
+	@State()
+	currentInputPlayer = 0
+
+	@Mutation()
+	incrementCurrentInputPlayer() {
+		this.currentInputPlayer++
+	}
+
+	@State()
+	playersWords: IPlayerWords[] = []
+
+	@Mutation()
+	addPlayerWords(value: IPlayerWords) {
+		this.playersWords.push(value)
 	}
 }

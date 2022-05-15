@@ -15,6 +15,12 @@ export class StartView extends VueComponent {
 		return !!this.store.teamsConfiguration
 	}
 
+	whenClickHandler() {
+		this.$router.push({
+			path: '/input-words',
+		})
+	}
+
 	render() {
 		return (
 			<div>
@@ -60,11 +66,12 @@ export class StartView extends VueComponent {
 
 				{this.isTeamsConfigurationSelected &&
 					<div class={styles.block}>
-						<router-link to='/'>
-							<button class={styles.button}>
-								Придумать слова
-							</button>
-						</router-link>
+						<button
+							class={styles.submitButton}
+							onClick={this.whenClickHandler}
+						>
+							Придумать слова
+						</button>
 					</div>
 				}
 			</div>

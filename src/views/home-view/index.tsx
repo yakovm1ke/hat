@@ -36,7 +36,7 @@ export class HomeView extends VueComponent {
 						<div class={styles.subText}>
 							Игра разделена на 3 этапа:
 						</div>
-						<ul class={styles.highlightedText}>
+						<ul class={[styles.subText, styles.highlightedText]}>
 							<li>Объяснение</li>
 							<li>Пантомима</li>
 							<li>Одно слово</li>

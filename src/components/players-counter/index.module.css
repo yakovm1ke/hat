@@ -7,14 +7,14 @@
 
 .button {
 	composes: button from "@/assets/styles.module.css";
-	width: auto;
-	flex-grow: 1;
+	flex-basis: 80px;
 	font-size: 40px;
 }
 
 .number {
 	display: flex;
 	box-sizing: border-box;
+	flex-basis: 80px;
 	flex-grow: 1;
 	align-items: center;
 	justify-content: center;
