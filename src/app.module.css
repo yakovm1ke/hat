@@ -1,5 +1,6 @@
 .app {
 	min-height: 100vh;
+	min-height: stretch;
 	background-color: var(--black);
 }
 
