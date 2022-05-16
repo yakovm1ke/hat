@@ -1,7 +1,10 @@
+body {
+	background-color: var(--black);
+}
+
 .app {
 	min-height: 100vh;
 	min-height: stretch;
-	background-color: var(--black);
 }
 
 .container {
