@@ -9,11 +9,11 @@ export class PlayerWordsCounter extends VueComponent {
 	public store: HatStore = useStore(this.$store)
 
 	get playerWordsCount() {
-		return this.store.playerWordsCount
+		return this.store.wordsCount
 	}
 
 	set playerWordsCount(value: number) {
-		this.store.setPlayerWordsCount(value)
+		this.store.setWordsCount(value)
 	}
 
 	render() {

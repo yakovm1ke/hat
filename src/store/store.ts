@@ -1,13 +1,9 @@
+import Vue from 'vue'
 import { State, Mutation, Getter } from 'vuex-simple'
 
 export interface ITeamConfiguration {
 	teamsCount: number
 	teamsPlayers: number[]
-}
-
-export interface IPlayerWords {
-	name: string
-	words: string[]
 }
 
 export class HatStore {
@@ -109,13 +105,13 @@ export class HatStore {
 	}
 
 	@State()
-	playerWordsCount = 4
+	wordsCount = 4
 
 	@Mutation()
-	setPlayerWordsCount(value: number) {
+	setWordsCount(value: number) {
 		if (value < 4) return
 		if (value > 6) return
-		this.playerWordsCount = value
+		this.wordsCount = value
 	}
 
 	@State()
@@ -127,10 +123,24 @@ export class HatStore {
 	}
 
 	@State()
-	playersWords: IPlayerWords[] = []
+	players: string[] = []
 
 	@Mutation()
-	addPlayerWords(value: IPlayerWords) {
-		this.playersWords.push(value)
+	setPlayer({key, value}: {
+		key: number,
+		value: string,
+	}) {
+		Vue.set(this.players, key, value)
+	}
+
+	@State()
+	words: string[] = []
+
+	@Mutation()
+	setWord({key, value}: {
+		key: number,
+		value: string,
+	}) {
+		Vue.set(this.words, key, value)
 	}
 }

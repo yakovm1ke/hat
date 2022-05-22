@@ -14,3 +14,7 @@
 .input::placeholder {
 	color: var(--gray);
 }
+
+.invalid {
+	border: 2px solid var(--purple);
+}

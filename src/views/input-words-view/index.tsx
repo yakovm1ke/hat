@@ -1,4 +1,5 @@
 import { VueComponent, Component } from '@/types';
+import { VNode } from 'vue';
 import { useStore } from 'vuex-simple'
 import { HatStore } from '@/store/store'
 
@@ -9,20 +10,50 @@ import { Input } from '@/components/input';
 export class InputWordsView extends VueComponent {
 	public store: HatStore = useStore(this.$store)
 
-	get currentPlayer() {
-		return this.store.currentInputPlayer
-	}
-
 	get totalPlayers() {
 		return this.store.totalPlayers
 	}
 
-	get playerWordsCount() {
-		return this.store.playerWordsCount
+	get wordsCount() {
+		return this.store.wordsCount
+	}
+
+	get words() {
+		return this.store.words
+	}
+
+	setWord(key: number, value: string) {
+		this.store.setWord({key, value})
+	}
+
+	get players() {
+		return this.store.players
+	}
+
+	setPlayer(value: string) {
+		this.store.setPlayer({
+			key: this.currentPlayer,
+			value,
+		})
+	}
+
+	get currentPlayer() {
+		return this.store.currentInputPlayer
 	}
 
 	get isLastPlayer() {
 		return this.currentPlayer + 1 === this.totalPlayers
+	}
+
+	get isValid() {
+		let i = this.currentPlayer * this.wordsCount
+		let isWordsValid = true
+		while(i < this.currentPlayer * this.wordsCount + this.wordsCount && isWordsValid) {
+			if (!this.words[i]) isWordsValid = false
+			i++
+		}
+
+		return !!this.players[this.currentPlayer] && isWordsValid
 	}
 
 	nextPlayer() {
@@ -30,11 +61,11 @@ export class InputWordsView extends VueComponent {
 	}
 
 	mounted() {
-		// if (!this.store.teamsConfiguration) {
-		// 	this.$router.push({
-		// 		path: '/error'
-		// 	})
-		// }
+		if (!this.store.teamsConfiguration) {
+			this.$router.push({
+				path: '/error'
+			})
+		}
 	}
 
 	whenClickHandler() {
@@ -45,6 +76,24 @@ export class InputWordsView extends VueComponent {
 			// })
 		}
 		this.nextPlayer()
+	}
+
+	renderWords() {
+		const wordInputs: VNode[] = [];
+
+		for (let i = 0; i < this.wordsCount; i++) {
+			const key = i + this.currentPlayer * this.wordsCount
+			wordInputs.push(
+				<Input
+					value={this.words[key]}
+					whenChange={(value) => this.setWord(key, value)}
+					invalid={!this.words[key]}
+					placeholder={`Введите слово ${i + 1}`}
+				/>
+			)
+		}
+
+		return wordInputs
 	}
 
 	render() {
@@ -67,20 +116,26 @@ export class InputWordsView extends VueComponent {
 				<div class={styles.block}>
 					<div class={styles.mainText}>Имя</div>
 					<Input
-						value=''
-						whenChange={() => ''}
-						placeholder='Введите свое имя'
+						value={this.players[this.currentPlayer]}
+						whenChange={(value) => this.setPlayer(value)}
+						invalid={!this.players[this.currentPlayer]}
+						placeholder={'Введите свое имя'}
 					/>
 				</div>
 
 				<div class={styles.block}>
+					<div class={styles.mainText}>Слова</div>
+					{this.renderWords()}
+				</div>
+
+				<div class={styles.block}>
 					<div class={styles.block}>
-						<button
+						{this.isValid && <button
 							class={styles.submitButton}
 							onClick={this.whenClickHandler}
 						>
 							{this.isLastPlayer ? 'К командам' : 'Следующий'}
-						</button>
+						</button>}
 					</div>
 				</div>
 			</div>
