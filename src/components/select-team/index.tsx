@@ -1,53 +1,53 @@
 import {VueComponent, Component, Watch} from '@/types'
 import { useStore } from 'vuex-simple'
-import { HatStore, ITeamConfiguration } from '@/store/store'
+import { Store, ITeamsSet } from '@/store/store'
 
 import styles from './index.module.css'
 
 @Component
 export class SelectTeam extends VueComponent {
-	public store: HatStore = useStore(this.$store)
+	public store: Store = useStore(this.$store)
 
 	get totalPlayers() {
 		return this.store.totalPlayers
 	}
 
-	get teamsConfiguration() {
-		return this.store.teamsConfiguration
+	get teamsSet() {
+		return this.store.teamsSet
 	}
 
-	set teamsConfiguration(value: ITeamConfiguration | undefined) {
-		this.store.setTeamsConfiguration(value)
+	set teamsSet(value: ITeamsSet | undefined) {
+		this.store.setTeamsSet(value)
 	}
 
-	get teamsConfigurations() {
-		return this.store.teamsConfigurations
+	get teamsSets() {
+		return this.store.teamsSets
 	}
 
-	isSelected(teamsConfiguration: ITeamConfiguration) {
-		return this.teamsConfiguration?.teamsCount === teamsConfiguration.teamsCount
+	isSelected(teamSet: ITeamsSet) {
+		return this.teamsSet?.length === teamSet.length
 	}
 
 	@Watch('totalPlayers')
-	resetTeamsConfiguration() {
-		this.teamsConfiguration = undefined
+	resetTeamsSet() {
+		this.teamsSet = undefined
 	}
 
-	renderTeams(teamsConfiguration: ITeamConfiguration) {
+	renderTeams(teamsSet: ITeamsSet) {
 		return (
 			<div
 				class={[
-					styles.teamsConfiguration,
-					{[styles.selected]: this.isSelected(teamsConfiguration)}
+					styles.teamsSet,
+					{[styles.selected]: this.isSelected(teamsSet)}
 				]}
-				onClick={() => this.teamsConfiguration = teamsConfiguration}
+				onClick={() => this.teamsSet = teamsSet}
 			>
-				<div class={styles.teamsCount}>
-					{teamsConfiguration.teamsCount}
+				<div class={styles.teamsNumber}>
+					{teamsSet.length}
 				</div>
-				<div class={styles.teamsPlayers}>
-					{teamsConfiguration.teamsPlayers.map((teamPlayers, index) => (
-						<div>{index + 1} команда: {teamPlayers} игрока</div>
+				<div class={styles.players}>
+					{teamsSet.map((players, index) => (
+						<div>{index + 1} команда: {players} игрока</div>
 					))}
 				</div>
 			</div>
@@ -56,9 +56,9 @@ export class SelectTeam extends VueComponent {
 
 	render() {
 		return (
-			<div class={styles.teamsConfigurations}>
-				{this.teamsConfigurations.map(teamsConfiguration => (
-					this.renderTeams(teamsConfiguration)
+			<div class={styles.teamsSets}>
+				{this.teamsSets.map((teamsSet) => (
+					this.renderTeams(teamsSet)
 				))}
 			</div>
 		)

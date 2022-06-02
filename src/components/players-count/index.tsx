@@ -1,12 +1,12 @@
 import {VueComponent, Component} from '@/types'
 import { useStore } from 'vuex-simple'
-import { HatStore } from '@/store/store'
+import { Store } from '@/store/store'
 
 import styles from './index.module.css'
 
 @Component
-export class PlayersCounter extends VueComponent {
-	public store: HatStore = useStore(this.$store)
+export class PlayersCount extends VueComponent {
+	public store: Store = useStore(this.$store)
 
 	get totalPlayers() {
 		return this.store.totalPlayers

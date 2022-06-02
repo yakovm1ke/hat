@@ -1,12 +1,11 @@
+import { shuffle } from '@/helpers/shuffle-array'
 import Vue from 'vue'
 import { State, Mutation, Getter } from 'vuex-simple'
 
-export interface ITeamConfiguration {
-	teamsCount: number
-	teamsPlayers: number[]
-}
+export type ITeamsSet = number[]
+export type ITeams = string[]
 
-export class HatStore {
+export class Store {
 	@State()
 	totalPlayers = 4
 
@@ -17,91 +16,33 @@ export class HatStore {
 		this.totalPlayers = value
 	}
 
+	// TODO функция getTeams которая, возвращает комбинации
 	@Getter()
-	get teamsConfigurations(): ITeamConfiguration[] {
+	get teamsSets(): ITeamsSet[] {
 		switch(this.totalPlayers) {
 		case 4:
-			return [
-				{
-					teamsCount: 2,
-					teamsPlayers: [2, 2]
-				}
-			]
+			return [[2, 2]]
 		case 5:
-			return [
-				{
-					teamsCount: 2,
-					teamsPlayers: [3, 2]
-				}
-			]
+			return [[3, 2]]
 		case 6:
-			return [
-				{
-					teamsCount: 2,
-					teamsPlayers: [3, 3]
-				},
-				{
-					teamsCount: 3,
-					teamsPlayers: [2, 2, 2]
-				},
-			]
+			return [[3, 3], [2, 2, 2]]
 		case 7:
-			return [
-				{
-					teamsCount: 2,
-					teamsPlayers: [4, 3]
-				},
-				{
-					teamsCount: 3,
-					teamsPlayers: [3, 2, 2]
-				},
-			]
+			return [[4, 3], [3, 2, 2]]
 		case 8:
-			return [
-				{
-					teamsCount: 2,
-					teamsPlayers: [4, 4]
-				},
-				{
-					teamsCount: 3,
-					teamsPlayers: [3, 3, 2]
-				},
-				{
-					teamsCount: 4,
-					teamsPlayers: [2, 2, 2, 2]
-				},
-			]
+			return [[4, 4], [3, 3, 2], [2, 2, 2, 2]]
 		case 9:
-			return [
-				{
-					teamsCount: 2,
-					teamsPlayers: [5, 4]
-				},
-				{
-					teamsCount: 3,
-					teamsPlayers: [3, 3, 3]
-				},
-				{
-					teamsCount: 4,
-					teamsPlayers: [3, 2, 2, 2]
-				},
-			]
+			return [[5, 4], [3, 3, 3], [3, 2, 2, 2]]
 		default:
-			return [
-				{
-					teamsCount: 0,
-					teamsPlayers: [0]
-				}
-			]
+			return [[0]]
 		}
 	}
 
 	@State()
-	teamsConfiguration?: ITeamConfiguration = undefined
+	teamsSet?: ITeamsSet = undefined
 
 	@Mutation()
-	setTeamsConfiguration(value?: ITeamConfiguration) {
-		this.teamsConfiguration = value
+	setTeamsSet(value?: ITeamsSet) {
+		this.teamsSet = value
 	}
 
 	@State()
@@ -112,6 +53,11 @@ export class HatStore {
 		if (value < 4) return
 		if (value > 6) return
 		this.wordsCount = value
+	}
+
+	@Getter()
+	get totalWords() {
+		return this.totalPlayers * this.wordsCount
 	}
 
 	@State()
@@ -142,5 +88,38 @@ export class HatStore {
 		value: string,
 	}) {
 		Vue.set(this.words, key, value)
+	}
+
+	@State()
+	shuffledWords: string[] = []
+
+	@Mutation()
+	shuffleWords() {
+		this.shuffledWords = shuffle(this.words)
+	}
+
+	@State()
+	shuffledPlayers: string[] = []
+
+	@Mutation()
+	shufflePlayers() {
+		this.shuffledPlayers = shuffle(this.players)
+	}
+
+	@Getter()
+	get teams(): ITeams[] {
+		if (!this.teamsSet || this.shuffledPlayers.length !== this.totalPlayers) return []
+
+		const teams: ITeams[] = []
+		let currentPlayer = 0
+
+		for (let i = 0; i < this.teamsSet.length; i++) {
+			for (let j = 0; j < this.teamsSet[i]; j++) {
+				teams[i].push(this.shuffledPlayers[currentPlayer])
+				currentPlayer++
+			}
+		}
+
+		return teams
 	}
 }

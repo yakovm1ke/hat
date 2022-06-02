@@ -1,18 +1,18 @@
 import {VueComponent, Component} from '@/types'
 import { useStore } from 'vuex-simple'
-import { HatStore } from '@/store/store'
+import { Store } from '@/store/store'
 
 import styles from './index.module.css'
 
 @Component
-export class PlayerWordsCounter extends VueComponent {
-	public store: HatStore = useStore(this.$store)
+export class WordsCount extends VueComponent {
+	public store: Store = useStore(this.$store)
 
-	get playerWordsCount() {
+	get wordsCount() {
 		return this.store.wordsCount
 	}
 
-	set playerWordsCount(value: number) {
+	set wordsCount(value: number) {
 		this.store.setWordsCount(value)
 	}
 
@@ -21,18 +21,18 @@ export class PlayerWordsCounter extends VueComponent {
 			<div class={styles.row}>
 				<button
 					class={styles.button}
-					onClick={() => this.playerWordsCount--}
+					onClick={() => this.wordsCount--}
 				>
 					-
 				</button>
 				<button
 					class={styles.button}
-					onClick={() => this.playerWordsCount++}
+					onClick={() => this.wordsCount++}
 				>
 					+
 				</button>
 				<div class={styles.number}>
-					{this.playerWordsCount}
+					{this.wordsCount}
 				</div>
 			</div>
 		)

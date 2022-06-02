@@ -1,29 +1,41 @@
 import { VueComponent, Component } from '@/types';
-import { PlayersCounter } from '@/components/players-counter';
+import { PlayersCount } from '@/components/players-count';
 import { SelectTeam } from '@/components/select-team';
-import { PlayerWordsCounter } from '@/components/player-words-counter';
+import { WordsCount } from '@/components/words-count';
 import { useStore } from 'vuex-simple'
-import { HatStore } from '@/store/store'
+import { Store } from '@/store/store'
 
 import styles from './index.module.css'
 
 @Component
 export class StartView extends VueComponent {
-	public store: HatStore = useStore(this.$store)
+	public store: Store = useStore(this.$store)
 
-	get isTeamsConfigurationSelected() {
-		return !!this.store.teamsConfiguration
+	get isValid() {
+		return !!this.store.teamsSet
 	}
 
-	whenClickHandler() {
+	get totalWords() {
+		return this.store.totalWords
+	}
+
+	whenSubmit() {
+		if (!this.isValid) return
+
 		this.$router.push({
 			path: '/input-words',
 		})
 	}
 
+	whenFormSubmit(event: Event) {
+		event.preventDefault()
+	}
+
 	render() {
 		return (
-			<div>
+			<form
+				onSubmit={this.whenFormSubmit}
+			>
 				<div class={styles.bigTitle}>
 					Начнем
 				</div>
@@ -38,7 +50,7 @@ export class StartView extends VueComponent {
 				</div>
 
 				<div class={styles.block}>
-					<PlayersCounter />
+					<PlayersCount />
 				</div>
 
 				<div class={styles.block}>
@@ -61,20 +73,31 @@ export class StartView extends VueComponent {
 				</div>
 
 				<div class={styles.block}>
-					<PlayerWordsCounter />
+					<WordsCount />
 				</div>
 
-				{this.isTeamsConfigurationSelected &&
+				{this.isValid && (
+					<div class={styles.block}>
+						<div class={styles.mainText}>
+							Общее число слов:{' '}
+							<span class={styles.highlightedText}>
+								{this.totalWords}
+							</span>
+						</div>
+					</div>
+				)}
+
+				{this.isValid && (
 					<div class={styles.block}>
 						<button
 							class={styles.submitButton}
-							onClick={this.whenClickHandler}
+							onClick={this.whenSubmit}
 						>
 							Придумать слова
 						</button>
 					</div>
-				}
-			</div>
+				)}
+			</form>
 		)
 	}
 }

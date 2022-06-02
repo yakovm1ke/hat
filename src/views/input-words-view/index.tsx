@@ -1,14 +1,14 @@
 import { VueComponent, Component } from '@/types';
 import { VNode } from 'vue';
 import { useStore } from 'vuex-simple'
-import { HatStore } from '@/store/store'
+import { Store } from '@/store/store'
 
 import styles from './index.module.css'
 import { Input } from '@/components/input';
 
 @Component
 export class InputWordsView extends VueComponent {
-	public store: HatStore = useStore(this.$store)
+	public store: Store = useStore(this.$store)
 
 	get totalPlayers() {
 		return this.store.totalPlayers
@@ -61,21 +61,30 @@ export class InputWordsView extends VueComponent {
 	}
 
 	mounted() {
-		if (!this.store.teamsConfiguration) {
+		if (!this.store.teamsSet) {
 			this.$router.push({
 				path: '/error'
 			})
 		}
 	}
 
-	whenClickHandler() {
+	whenSubmit() {
+		if(!this.isValid) return
+
 		if (this.isLastPlayer) {
-			return
-			// this.$router.push({
-			// 	path: '/'
-			// })
+			this.store.shuffleWords()
+			this.store.shufflePlayers()
+
+			this.$router.push({
+				path: 'teams'
+			})
 		}
 		this.nextPlayer()
+	}
+
+	whenFormSubmit(event: Event) {
+		event.preventDefault()
+		this.whenSubmit()
 	}
 
 	renderWords() {
@@ -98,7 +107,9 @@ export class InputWordsView extends VueComponent {
 
 	render() {
 		return (
-			<div>
+			<form
+				onSubmit={this.whenFormSubmit}
+			>
 				<div class={styles.bigTitle}>
 					Игрок{' '}
 					<span class={styles.ghostText}>
@@ -132,13 +143,13 @@ export class InputWordsView extends VueComponent {
 					<div class={styles.block}>
 						{this.isValid && <button
 							class={styles.submitButton}
-							onClick={this.whenClickHandler}
+							onClick={this.whenSubmit}
 						>
 							{this.isLastPlayer ? 'К командам' : 'Следующий'}
 						</button>}
 					</div>
 				</div>
-			</div>
+			</form>
 		)
 	}
 }
