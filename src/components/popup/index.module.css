@@ -1,0 +1,38 @@
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	backdrop-filter: blur(2px);
+}
+
+.content {
+	width: 300px;
+	box-sizing: border-box;
+	padding: 16px;
+	background-color: var(--white);
+	border-radius: 16px;
+	color: var(--black);
+}
+
+.heading {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.title {
+	font-weight: bold;
+}
+
+.closeButton {
+	font-weight: bold;
+}
+
+.closeButton:hover {
+	cursor: pointer;
+}

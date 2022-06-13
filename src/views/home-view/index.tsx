@@ -1,3 +1,4 @@
+import { Popup } from '@/components/popup';
 import { VueComponent, Component } from '@/types';
 
 import styles from './index.module.css'
@@ -5,9 +6,18 @@ import styles from './index.module.css'
 @Component
 export class HomeView extends VueComponent {
 
+	isPopupShown = true
+
 	public render() {
 		return (
 			<div>
+				<Popup
+					isShow={this.isPopupShown}
+					title={'Привет'}
+					content={<div></div>}
+					whenClose={() => this.isPopupShown = false}
+				/>
+
 				<div class={styles.bigTitle}>
 					Шляпа
 				</div>
