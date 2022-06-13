@@ -1,22 +1,22 @@
 import {VueComponent, Component} from '@/types'
-import { useStore } from 'vuex-simple'
-import { Store } from '@/store/store'
+import { useStore, RootModule } from '@/store/root'
 
 import styles from './index.module.css'
 
 @Component
 export class WordsCount extends VueComponent {
-	public store: Store = useStore(this.$store)
 
-	get wordsCount() {
-		return this.store.wordsCount
+	public store = useStore<RootModule>(this.$store)
+
+	private get wordsCount() {
+		return this.store.words.wordsCount
 	}
 
-	set wordsCount(value: number) {
-		this.store.setWordsCount(value)
+	private set wordsCount(value: number) {
+		this.store.words.setWordsCount(value)
 	}
 
-	render() {
+	public render() {
 		return (
 			<div class={styles.row}>
 				<button

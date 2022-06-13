@@ -4,13 +4,14 @@ import styles from './index.module.css'
 
 @Component
 export class ErrorView extends VueComponent {
-	whenClickHandler() {
+
+	private whenClickHandler() {
 		this.$router.push({
 			path: '/'
 		})
 	}
 
-	render() {
+	public render() {
 		return (
 			<div>
 				<div class={styles.bigTitle}>

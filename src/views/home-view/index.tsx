@@ -4,7 +4,8 @@ import styles from './index.module.css'
 
 @Component
 export class HomeView extends VueComponent {
-	render() {
+
+	public render() {
 		return (
 			<div>
 				<div class={styles.bigTitle}>

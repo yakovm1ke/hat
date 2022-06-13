@@ -1,22 +1,22 @@
 import {VueComponent, Component} from '@/types'
-import { useStore } from 'vuex-simple'
-import { Store } from '@/store/store'
+import {useStore, RootModule} from '@/store/root'
 
 import styles from './index.module.css'
 
 @Component
 export class PlayersCount extends VueComponent {
-	public store: Store = useStore(this.$store)
 
-	get totalPlayers() {
-		return this.store.totalPlayers
+	public store = useStore<RootModule>(this.$store)
+
+	private get totalPlayers() {
+		return this.store.players.totalPlayers
 	}
 
-	set totalPlayers(value: number) {
-		this.store.setPlayersCount(value)
+	private set totalPlayers(value: number) {
+		this.store.players.setPlayersCount(value)
 	}
 
-	render() {
+	public render() {
 		return (
 			<div class={styles.row}>
 				<button

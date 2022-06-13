@@ -11,12 +11,16 @@ type Props = {
 
 @Component
 export class Input extends VueComponent<Props> {
-	@Prop() value: Props['value']
-	@Prop() whenChange: Props['whenChange']
-	@Prop() invalid: Props['invalid']
-	@Prop() placeholder: Props['placeholder']
 
-	render() {
+	@Prop() private readonly value: Props['value']
+
+	@Prop() private readonly whenChange: Props['whenChange']
+
+	@Prop() private readonly invalid: Props['invalid']
+
+	@Prop() private readonly placeholder: Props['placeholder']
+
+	public render() {
 		return (
 			<input
 				value={this.value}

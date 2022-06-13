@@ -1,17 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { createVuexStore } from 'vuex-simple'
-import { Store } from './store'
+
+import { RootModule } from './root'
 
 Vue.use(Vuex)
 
-const instance = new Store()
+const instance = new RootModule()
 
-export default createVuexStore(instance, {
-	strict: true,
-	modules: {},
-	plugins: []
-});
-
-export * from './store'
-export {useStore} from 'vuex-simple'
+export default createVuexStore(instance, { strict: true })

@@ -1,39 +1,40 @@
 import {VueComponent, Component, Watch} from '@/types'
-import { useStore } from 'vuex-simple'
-import { Store, ITeamsSet } from '@/store/store'
+import { ITeamsSet } from '@/store/modules/teams'
 
 import styles from './index.module.css'
+import { RootModule, useStore } from '@/store/root'
 
 @Component
 export class SelectTeam extends VueComponent {
-	public store: Store = useStore(this.$store)
 
-	get totalPlayers() {
-		return this.store.totalPlayers
+	public store = useStore<RootModule>(this.$store)
+
+	private get totalPlayers() {
+		return this.store.players.totalPlayers
 	}
 
-	get teamsSet() {
-		return this.store.teamsSet
+	private get teamsSet() {
+		return this.store.teams.teamsSet
 	}
 
-	set teamsSet(value: ITeamsSet | undefined) {
-		this.store.setTeamsSet(value)
+	private set teamsSet(value: ITeamsSet | null) {
+		this.store.teams.setTeamsSet(value)
 	}
 
-	get teamsSets() {
-		return this.store.teamsSets
+	private get teamsSets() {
+		return this.store.teams.teamsSets
 	}
 
-	isSelected(teamSet: ITeamsSet) {
+	private isSelected(teamSet: ITeamsSet) {
 		return this.teamsSet?.length === teamSet.length
 	}
 
 	@Watch('totalPlayers')
-	resetTeamsSet() {
-		this.teamsSet = undefined
+	private resetTeamsSet() {
+		this.teamsSet = null
 	}
 
-	renderTeams(teamsSet: ITeamsSet) {
+	public renderTeams(teamsSet: ITeamsSet) {
 		return (
 			<div
 				class={[
@@ -54,7 +55,7 @@ export class SelectTeam extends VueComponent {
 		)
 	}
 
-	render() {
+	public render() {
 		return (
 			<div class={styles.teamsSets}>
 				{this.teamsSets.map((teamsSet) => (

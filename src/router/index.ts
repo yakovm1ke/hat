@@ -5,6 +5,7 @@ import { StartView } from '@/views/start-view'
 import { InputWordsView } from '@/views/input-words-view'
 import { ErrorView } from '@/views/error-view'
 import { TeamsView } from '@/views/teams-view'
+import { ReadyView } from '@/views/ready-view'
 
 Vue.use(VueRouter)
 
@@ -12,27 +13,32 @@ const routes: Array<RouteConfig> = [
 	{
 		path: '/',
 		name: 'home',
-		component: HomeView
+		component: HomeView,
 	},
 	{
 		path: '/start',
 		name: 'start',
-		component: StartView
+		component: StartView,
 	},
 	{
 		path: '/input-words',
 		name: 'input-words',
-		component: InputWordsView
+		component: InputWordsView,
 	},
 	{
 		path: '/teams',
 		name: 'teams',
-		component: TeamsView
+		component: TeamsView,
 	},
 	{
 		path: '/error',
 		name: 'error',
-		component: ErrorView
+		component: ErrorView,
+	},
+	{
+		path: '/ready',
+		name: 'ready',
+		component: ReadyView,
 	},
 	// {
 	// 	path: '/about',

@@ -2,40 +2,47 @@ import { VueComponent, Component } from '@/types';
 import { PlayersCount } from '@/components/players-count';
 import { SelectTeam } from '@/components/select-team';
 import { WordsCount } from '@/components/words-count';
-import { useStore } from 'vuex-simple'
-import { Store } from '@/store/store'
+import { useStore, RootModule } from '@/store/root'
 
 import styles from './index.module.css'
+import { LocalStorageItems } from '@/core/consts';
 
 @Component
 export class StartView extends VueComponent {
-	public store: Store = useStore(this.$store)
 
-	get isValid() {
-		return !!this.store.teamsSet
+	public store = useStore<RootModule>(this.$store)
+
+	private get isValid() {
+		return !!this.store.teams.teamsSet
 	}
 
-	get totalWords() {
-		return this.store.totalWords
+	private get totalWords() {
+		return this.store.words.totalWords
 	}
 
-	whenSubmit() {
+	private whenSubmit() {
 		if (!this.isValid) return
+
+		const totalPlayers = String(this.store.players.totalPlayers)
+
+		const teamSet = JSON.stringify(this.store.teams.teamsSet)
+
+		window.localStorage.setItem(LocalStorageItems.TotalPlayers, totalPlayers)
+
+		window.localStorage.setItem(LocalStorageItems.TeamsSet, teamSet)
 
 		this.$router.push({
 			path: '/input-words',
 		})
 	}
 
-	whenFormSubmit(event: Event) {
+	private whenFormSubmit(event: Event) {
 		event.preventDefault()
 	}
 
-	render() {
+	public render() {
 		return (
-			<form
-				onSubmit={this.whenFormSubmit}
-			>
+			<form onSubmit={this.whenFormSubmit} >
 				<div class={styles.bigTitle}>
 					Начнем
 				</div>

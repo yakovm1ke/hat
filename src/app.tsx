@@ -7,7 +7,7 @@ import styles from './app.module.css'
 
 @Component
 export class App extends VueComponent {
-	render() {
+	public render() {
 		return (
 			<div class={styles.app}>
 				<div class={styles.container}>
