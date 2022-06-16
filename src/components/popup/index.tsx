@@ -1,4 +1,4 @@
-import { Component, VueComponent, Prop } from '@/types'
+import { Component, VueComponent, Prop, Ref } from '@/types'
 import { VNode } from 'vue'
 import styles from './index.module.css'
 
@@ -20,12 +20,26 @@ export class Popup extends VueComponent<PopupProps> {
 
 	@Prop() private readonly whenClose: PopupProps['whenClose']
 
+	@Ref() private readonly container!: HTMLDivElement
+
+	private whenClickOutside(event: PointerEvent) {
+		if (!(this.container === event.target || this.container?.contains(event.target as Node))) {
+			this.whenClose()
+		}
+	}
+
 	public render() {
 		if (!this.isShow) return
 
 		return (
-			<div class={styles.popup}>
-				<div class={styles.content}>
+			<div
+				class={styles.popup}
+				onClick={this.whenClickOutside}
+			>
+				<div
+					class={styles.content}
+					ref={'container'}
+				>
 					<div class={styles.heading}>
 						<div class={styles.title}>
 							{this.title}
@@ -34,7 +48,7 @@ export class Popup extends VueComponent<PopupProps> {
 							class={styles.closeButton}
 							onClick={this.whenClose}
 						>
-							Close
+							&#10005;
 						</div>
 					</div>
 					{this.content}

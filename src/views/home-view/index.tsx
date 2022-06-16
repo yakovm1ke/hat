@@ -75,10 +75,10 @@ export class HomeView extends VueComponent {
 							1 Этап. Объяснение
 						</div>
 						<div class={styles.subText}>
-							Участник(ца) объясняет своей команде слово, которое ему(ей) выпало.{' '}
-							<span class={styles.highlightedText}>
-								Не используйте однокоренные слова и не объясняйте слова по буквам.
-							</span>
+							Участник(ца) объясняет своей команде слово, которое ему(ей) выпало.
+						</div>
+						<div class={[styles.highlightedText, styles.subText]}>
+							Не используйте однокоренные слова и не объясняйте слова по буквам.
 						</div>
 					</div>
 
@@ -88,9 +88,9 @@ export class HomeView extends VueComponent {
 						</div>
 						<div class={styles.subText}>
 							Участник(ца) показывает своей команде слово, которое ему(ей) выпало.{' '}
-							<span class={styles.highlightedText}>
-								Не показывайте слова по буквам и не издавайте звуки.
-							</span>
+						</div>
+						<div class={[styles.highlightedText, styles.subText]}>
+							Не показывайте слова по буквам и не издавайте звуки.
 						</div>
 					</div>
 
@@ -100,9 +100,9 @@ export class HomeView extends VueComponent {
 						</div>
 						<div class={styles.subText}>
 							Участник(ца) говорит своей команде только одно слово, которое ассоциируется с выпавшим.{' '}
-							<span class={styles.highlightedText}>
-								Не используйте однокоренные слова и не говорите только одно.
-							</span>
+						</div>
+						<div class={[styles.highlightedText, styles.subText]}>
+							Не используйте однокоренные слова и не говорите только одно.
 						</div>
 					</div>
 

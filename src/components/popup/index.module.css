@@ -8,21 +8,25 @@
 	align-items: center;
 	justify-content: center;
 	backdrop-filter: blur(2px);
+	color: var(--black);
 }
 
 .content {
-	width: 300px;
+	overflow: hidden;
+	width: 100%;
+	max-width: 500px;
 	box-sizing: border-box;
 	padding: 16px;
+	margin: 45px;
 	background-color: var(--white);
 	border-radius: 16px;
-	color: var(--black);
 }
 
 .heading {
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
+	gap: 8px;
 }
 
 .title {
