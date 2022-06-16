@@ -12,10 +12,12 @@ module.exports = {
 		ecmaVersion: 2020,
 	},
 	rules: {
-		"indent": ["error", "tab"],
+		'indent': ['error', 'tab'],
 		'@typescript-eslint/no-explicit-any': 'off',
 		'@typescript-eslint/ban-types': 'off',
 		'no-console': 'warn',
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+		'quotes': ['error', 'single'],
+		'semi': ['error', 'never'],
 	}
 }

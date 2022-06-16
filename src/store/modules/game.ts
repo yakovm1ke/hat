@@ -1,6 +1,6 @@
-import { Stages as Stage } from '@/core/consts';
-import { Getter, Mutation, State } from 'vuex-simple';
-import { BaseModule } from '../common/base-module';
+import { Stages as Stage } from '@/core/consts'
+import { Getter, Mutation, State } from 'vuex-simple'
+import { BaseModule } from '../common/base-module'
 
 export class GameModule extends BaseModule {
 

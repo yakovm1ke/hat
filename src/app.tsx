@@ -1,4 +1,4 @@
-import { VueComponent, Component} from '@/types';
+import { VueComponent, Component} from '@/types'
 import '@/assets/colors.css'
 import '@/assets/reset.css'
 import 'normalize.css'

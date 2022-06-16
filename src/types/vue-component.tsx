@@ -1,4 +1,4 @@
-import Vue, { VNodeData } from 'vue';
+import Vue, { VNodeData } from 'vue'
 import { Component } from 'vue-property-decorator'
 
 type CSSClass = (string | string[] | {

@@ -1,11 +1,11 @@
-import { VueComponent, Component } from '@/types';
-import { PlayersCount } from '@/components/players-count';
-import { SelectTeam } from '@/components/select-team';
-import { WordsCount } from '@/components/words-count';
+import { VueComponent, Component } from '@/types'
+import { PlayersCount } from '@/components/players-count'
+import { SelectTeam } from '@/components/select-team'
+import { WordsCount } from '@/components/words-count'
 import { useStore, RootModule } from '@/store/root'
 
 import styles from './index.module.css'
-import { LocalStorageItems } from '@/core/consts';
+import { LocalStorageItems } from '@/core/consts'
 
 @Component
 export class StartView extends VueComponent {

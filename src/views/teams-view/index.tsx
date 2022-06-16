@@ -1,9 +1,9 @@
-import { VueComponent, Component } from '@/types';
+import { VueComponent, Component } from '@/types'
 
 import styles from './index.module.css'
 import {RootModule, useStore} from '@/store/root'
-import { ITeam } from '@/store/modules/teams';
-import { LocalStorageItems } from '@/core/consts';
+import { ITeam } from '@/store/modules/teams'
+import { LocalStorageItems } from '@/core/consts'
 
 @Component
 export class TeamsView extends VueComponent {

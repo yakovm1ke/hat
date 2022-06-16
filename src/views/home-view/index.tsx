@@ -1,5 +1,5 @@
-import { Popup } from '@/components/popup';
-import { VueComponent, Component } from '@/types';
+import { Popup } from '@/components/popup'
+import { VueComponent, Component } from '@/types'
 
 import styles from './index.module.css'
 

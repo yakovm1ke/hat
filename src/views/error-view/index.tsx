@@ -1,4 +1,4 @@
-import { VueComponent, Component } from '@/types';
+import { VueComponent, Component } from '@/types'
 
 import styles from './index.module.css'
 

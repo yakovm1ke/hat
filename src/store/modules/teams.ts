@@ -47,7 +47,7 @@ export class TeamsModule extends BaseModule {
 
 		for (let i = 0; i < this.teamsCount; i++) {
 			teams[i] = []
-			
+
 			for (let j = 0; j < this.teamsSet[i]; j++) {
 				teams[i].push(this.root.players.shuffledPlayers[currentPlayer])
 				currentPlayer++

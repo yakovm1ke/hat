@@ -1,5 +1,5 @@
-import { RootModule, useStore } from '@/store/root';
-import { VueComponent, Component } from '@/types';
+import { RootModule, useStore } from '@/store/root'
+import { VueComponent, Component } from '@/types'
 
 import styles from './index.module.css'
 

@@ -1,10 +1,10 @@
-import { VueComponent, Component } from '@/types';
-import { VNode } from 'vue';
+import { VueComponent, Component } from '@/types'
+import { VNode } from 'vue'
 import { useStore, RootModule } from '@/store/root'
 
 import styles from './index.module.css'
-import { Input } from '@/components/input';
-import { LocalStorageItems } from '@/core/consts';
+import { Input } from '@/components/input'
+import { LocalStorageItems } from '@/core/consts'
 
 @Component
 export class InputWordsView extends VueComponent {
@@ -99,7 +99,7 @@ export class InputWordsView extends VueComponent {
 	}
 
 	public renderWords() {
-		const wordInputs: VNode[] = [];
+		const wordInputs: VNode[] = []
 
 		for (let i = 0; i < this.wordsCount; i++) {
 			const key = i + this.currentPlayer * this.wordsCount

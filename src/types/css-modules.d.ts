@@ -3,11 +3,11 @@ interface ClassNames {
 }
 
 declare module '*.css?module' {
-  const classNames: ClassNames;
+  const classNames: ClassNames
   export = classNames;
 }
 
 declare module '*.module.css' {
-  const classNames: ClassNames;
+  const classNames: ClassNames
   export = classNames;
 }
