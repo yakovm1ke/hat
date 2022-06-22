@@ -8,7 +8,7 @@ import { LocalStorageItems } from '@/core/consts'
 @Component
 export class TeamsView extends VueComponent {
 
-	private store = useStore<RootModule>(this.$store)
+	private readonly store = useStore<RootModule>(this.$store)
 
 	private get teamsCount() {
 		return this.store.teams.teamsCount

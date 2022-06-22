@@ -4,6 +4,7 @@ import { State, Mutation } from 'vuex-simple'
 import { BaseModule } from '../common/base-module'
 
 export class PlayersModule extends BaseModule {
+
 	@State()
 	totalPlayers = 4
 

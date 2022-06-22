@@ -7,7 +7,7 @@ import { RootModule, useStore } from '@/store/root'
 @Component
 export class SelectTeam extends VueComponent {
 
-	public store = useStore<RootModule>(this.$store)
+	private readonly store = useStore<RootModule>(this.$store)
 
 	private get totalPlayers() {
 		return this.store.players.totalPlayers

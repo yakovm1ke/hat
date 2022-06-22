@@ -6,7 +6,7 @@ import styles from './index.module.css'
 @Component
 export class HomeView extends VueComponent {
 
-	isPopupShown = true
+	private isPopupShown = true
 
 	public render() {
 		return (
@@ -21,6 +21,7 @@ export class HomeView extends VueComponent {
 				<div class={styles.bigTitle}>
 					Шляпа
 				</div>
+
 				<div class={styles.content}>
 					<div class={styles.block}>
 						<div class={styles.mainText}>

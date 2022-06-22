@@ -6,7 +6,7 @@ import styles from './index.module.css'
 @Component
 export class WordsCount extends VueComponent {
 
-	public store = useStore<RootModule>(this.$store)
+	private readonly store = useStore<RootModule>(this.$store)
 
 	private get wordsCount() {
 		return this.store.words.wordsCount

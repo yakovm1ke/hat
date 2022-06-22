@@ -6,7 +6,7 @@ import styles from './index.module.css'
 @Component
 export class PlayersCount extends VueComponent {
 
-	public store = useStore<RootModule>(this.$store)
+	private readonly store = useStore<RootModule>(this.$store)
 
 	private get totalPlayers() {
 		return this.store.players.totalPlayers

@@ -5,6 +5,7 @@ export type ITeamsSet = number[]
 export type ITeam = string[]
 
 export class TeamsModule extends BaseModule {
+
 	@Getter()
 	get teamsSets(): ITeamsSet[] {
 		switch(this.root.players.totalPlayers) {

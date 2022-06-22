@@ -9,7 +9,7 @@ import { LocalStorageItems } from '@/core/consts'
 @Component
 export class InputWordsView extends VueComponent {
 
-	public store = useStore<RootModule>(this.$store)
+	private readonly store = useStore<RootModule>(this.$store)
 
 	private get totalPlayers() {
 		return this.store.players.totalPlayers

@@ -10,7 +10,7 @@ import { LocalStorageItems } from '@/core/consts'
 @Component
 export class StartView extends VueComponent {
 
-	public store = useStore<RootModule>(this.$store)
+	private readonly store = useStore<RootModule>(this.$store)
 
 	private get isValid() {
 		return !!this.store.teams.teamsSet

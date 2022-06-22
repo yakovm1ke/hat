@@ -4,6 +4,7 @@ import { State, Mutation, Getter } from 'vuex-simple'
 import { BaseModule } from '../common/base-module'
 
 export class WordsModule extends BaseModule {
+
 	@State()
 	wordsCount = 4
 
