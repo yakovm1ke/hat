@@ -1,5 +1,5 @@
 import { VueComponent, Component} from '@/types'
-import '@/assets/colors.css'
+import '@/assets/css/main.css'
 import '@/assets/reset.css'
 import 'normalize.css'
 

@@ -1,4 +1,4 @@
-import { Popup } from '@/components/popup'
+import { Button } from '@/components/ui'
 import { VueComponent, Component } from '@/types'
 
 import styles from './index.module.css'
@@ -6,18 +6,17 @@ import styles from './index.module.css'
 @Component
 export class HomeView extends VueComponent {
 
-	private isPopupShown = true
+	private whenClickHandler() {
+		this.$router.push('/start')
+	}
+
+	// TODO компонент страницы c заголовком и контентом через слоты
+	// TODO Убрать скроллбар
+	// TODO компонент параграфа
 
 	public render() {
 		return (
 			<div>
-				<Popup
-					isShow={this.isPopupShown}
-					title={'Привет'}
-					content={<div></div>}
-					whenClose={() => this.isPopupShown = false}
-				/>
-
 				<div class={styles.bigTitle}>
 					Шляпа
 				</div>
@@ -117,11 +116,10 @@ export class HomeView extends VueComponent {
 					</div>
 
 					<div class={styles.block}>
-						<router-link to="/start">
-							<button class={styles.button}>
-								Начать
-							</button>
-						</router-link>
+						<Button
+							label={'Начать'}
+							whenClick={this.whenClickHandler}
+						/>
 					</div>
 				</div>
 			</div>

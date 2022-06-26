@@ -14,14 +14,7 @@
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
     "strictPropertyInitialization": false,
-    "plugins": [
-      {
-        "name": "typescript-plugin-css-modules",
-        "options": {
-          "customTemplate": "@/types/custom-template.js"
-        }
-      }
-    ],
+		"plugins": [{ "name": "typescript-plugin-css-modules" }],
     "sourceMap": true,
     "baseUrl": ".",
     "types": [

@@ -4,10 +4,10 @@ interface ClassNames {
 
 declare module '*.css?module' {
   const classNames: ClassNames
-  export = classNames;
+  export default classNames
 }
 
 declare module '*.module.css' {
   const classNames: ClassNames
-  export = classNames;
+  export default classNames
 }

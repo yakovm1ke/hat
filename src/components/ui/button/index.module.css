@@ -1,0 +1,68 @@
+.button {
+	display: flex;
+	min-width: var(--sizeExtraBig);
+	height: calc(var(--sizeBig) + 2 * var(--sizeNormal));
+	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
+	padding: var(--sizeNormal);
+	border: none;
+	background-color: var(--purple);
+	border-radius: var(--sizeNormal);
+	color: var(--white);
+	font-size: var(--sizeBig);
+	gap: var(--sizeSmall);
+	transition: var(--transitionFast);
+}
+
+.button:hover {
+	cursor: pointer;
+	filter: var(--buttonBrightness);
+}
+
+.button:focus {
+	box-shadow: var(--buttonBoxShadow);
+	cursor: pointer;
+	outline: none;
+}
+
+.button:active {
+	transform: var(--buttonTransform);
+}
+
+.button:disabled {
+	filter: var(--disabledGrayscale);
+	opacity: var(--disabledOpacity);
+}
+
+.button:disabled:active {
+	transform: none;
+}
+
+.spreadButton {
+	width: 100%;
+	flex-grow: 1;
+}
+
+.ghostButton {
+	background: none;
+}
+
+.ghostButton:hover {
+	background: var(--darkGray);
+	filter: none;
+}
+
+.outlineButton {
+	border: var(--buttonOutline) solid var(--purple);
+	background: none;
+}
+
+.outlineButton:hover {
+	background: var(--darkGray);
+	filter: none;
+}
+
+.submitButton {
+	background-color: var(--green);
+}
