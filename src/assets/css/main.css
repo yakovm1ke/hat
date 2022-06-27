@@ -12,10 +12,13 @@
 	--sizeNormal: 16px;
 	--sizeBig: 24px;
 	--sizeExtraBig: 32px;
+	--pageTitleFontSize: 64px;
+	--blockTitleFontSize: 24px;
+	--blockTextFontSize: 20px;
 	--buttonOutline: 2px;
 	--buttonBrightness: brightness(0.9);
 	--buttonTransform: scale(0.95);
-	--buttonBoxShadow: 0 0 10px var(--gray);
+	--buttonBoxShadow: 0 0 6px var(--gray);
 	--disabledGrayscale: grayscale(0.5);
 	--disabledOpacity: 0.5;
 	--transitionFast: 50ms;
@@ -24,4 +27,9 @@
 
 	color: var(--white);
 	font-family: Roboto, sans-serif;
+}
+
+ul {
+	padding: 0 20px;
+	margin: 0;
 }

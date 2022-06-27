@@ -1,0 +1,21 @@
+.block {
+	margin-top: var(--sizeBig);
+}
+
+.title {
+	font-size: var(--blockTitleFontSize);
+}
+
+.text {
+	font-size: var(--blockTextFontSize);
+}
+
+.highlighted {
+	composes: text;
+	color: var(--green);
+}
+
+.ghost {
+	composes: text;
+	color: var(--gray);
+}

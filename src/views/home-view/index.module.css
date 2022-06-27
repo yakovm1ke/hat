@@ -2,6 +2,10 @@
 	composes: bigTitle from "@/assets/styles.module.css";
 }
 
+.content {
+	display: block;
+}
+
 .block {
 	composes: block from "@/assets/styles.module.css";
 }

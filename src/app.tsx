@@ -1,6 +1,5 @@
 import { VueComponent, Component} from '@/types'
 import '@/assets/css/main.css'
-import '@/assets/reset.css'
 import 'normalize.css'
 
 import styles from './app.module.css'
