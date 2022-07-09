@@ -1,0 +1,30 @@
+.teamsSetOptions {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sizeNormal);
+}
+
+.teamsSet {
+	border: var(--border);
+	color: var(--gray);
+}
+
+.teamsSet:hover {
+	cursor: pointer;
+}
+
+.teamsNumber {
+	font-size: var(--pageTitleFontSize);
+	text-align: center;
+}
+
+.players {
+	display: flex;
+	flex-direction: column;
+	font-size: var(--blockTextFontSize);
+}
+
+.selected {
+	border-color: var(--green);
+	color: var(--white);
+}

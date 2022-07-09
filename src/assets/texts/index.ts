@@ -1,6 +1,6 @@
-import { PageBlock } from '@/components/ui'
+import { TextBlockProps } from '@/components/ui'
 
-export const mainPageBlocks: PageBlock[] = [
+export const instructions: TextBlockProps[] = [
 	{
 		title: 'Число игроков',
 		content: {
@@ -82,6 +82,7 @@ export const mainPageBlocks: PageBlock[] = [
 				text: 'Участник(ца) говорит своей команде только одно слово, которое ассоциируется с выпавшим.',
 			},
 			{
+				type: 'highlighted',
 				text: 'Не используйте однокоренные слова и не говорите только одно.',
 			},
 		],

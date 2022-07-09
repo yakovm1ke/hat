@@ -1,29 +1,27 @@
 import { VueComponent, Component, Prop } from '@/types'
 import { VNode } from 'vue'
+import { Block, BlockProps } from './block'
 
 import styles from './index.module.css'
 
-interface ContentItem {
-	text?: string | VNode
+export interface IContentItem {
+	text?: string | VNode | number
 	type?: 'basic' | 'highlighted' | 'ghost'
 	isHtml?: boolean
 }
 
-export interface PageBlock {
-	title?: string
-	content?: ContentItem | ContentItem[]
+export interface TextBlockProps extends BlockProps {
+	content?: IContentItem | IContentItem[]
 }
 
-type BlockProps = PageBlock
+@Component<TextBlock>({})
+export class TextBlock extends VueComponent<TextBlockProps> {
 
-@Component<Block>({})
-export class Block extends VueComponent<BlockProps> {
+	@Prop() private readonly title: TextBlockProps['title']
 
-	@Prop() private readonly title: BlockProps['title']
+	@Prop() private readonly content: TextBlockProps['content']
 
-	@Prop() private readonly content: BlockProps['content']
-
-	private getContentItemClass(	type?: 'basic' | 'highlighted' | 'ghost' ) {
+	private getContentItemClass(type?: 'basic' | 'highlighted' | 'ghost' ) {
 		switch(type) {
 		case('highlighted'):
 			return [styles.highlighted]
@@ -34,7 +32,7 @@ export class Block extends VueComponent<BlockProps> {
 		}
 	}
 
-	private renderContentItem(contentItem?: ContentItem) {
+	private renderContentItem(contentItem?: IContentItem): VNode {
 		return (
 			contentItem?.isHtml
 				?	(
@@ -51,15 +49,11 @@ export class Block extends VueComponent<BlockProps> {
 		)
 	}
 
-	public render() {
+	public render(): VNode {
 		return (
-			<div class={styles.block}>
-				{this.title && (
-					<div class={styles.title}>
-						{this.title}
-					</div>
-				)}
-
+			<Block
+				title={this.title}
+			>
 				{Array.isArray(this.content)
 					? this.content
 						.map(contentItem => (
@@ -69,7 +63,7 @@ export class Block extends VueComponent<BlockProps> {
 						this.renderContentItem(this.content)
 					)
 				}
-			</div>
+			</Block>
 		)
 	}
 }

@@ -1,90 +1,54 @@
 import { VueComponent, Component } from '@/types'
-
-import styles from './index.module.css'
 import {RootModule, useStore} from '@/store/root'
-import { ITeam } from '@/store/modules/teams'
-import { LocalStorageItems } from '@/core/consts'
+import { Block, Button, Page } from '@/components/ui'
+import { Team } from '@/components/team'
 
-@Component
-export class TeamsView extends VueComponent {
-
-	private readonly store = useStore<RootModule>(this.$store)
-
-	private get teamsCount() {
-		return this.store.teams.teamsCount
-	}
-
-	private get teams() {
-		return this.store.teams.teams
-	}
-
-	private mounted() {
-		if (!this.store.teams.teamsSet) {
+@Component<TeamsView>({
+	mounted() {
+		if (!this.teamsModule.teamsSet) {
 			this.$router.push({
-				path: '/error'
+				name: 'error',
 			})
 		}
+	},
+})
+
+export class TeamsView extends VueComponent {
+
+	private readonly teamsModule = useStore<RootModule>(this.$store).teams
+
+	private get teams() {
+		return this.teamsModule.teams
 	}
 
-	private whenSubmit(event: Event) {
-		event.preventDefault()
-
-		const teams = JSON.stringify(this.store.teams.teams)
-
-		const shuffledWords = JSON.stringify(this.store.words.shuffledWords)
-
-		window.localStorage.setItem(LocalStorageItems.Teams, teams)
-
-		window.localStorage.setItem(LocalStorageItems.ShuffledWords, shuffledWords)
-
+	private whenSubmit() {
 		this.$router.push({
-			path: '/ready',
+			name: 'ready',
 		})
-	}
-
-	public renderTeam(team: ITeam, index: number) {
-		return (
-			<div class={styles.block}>
-				<div class={[styles.mainText, styles.highlightedText]}>
-					{`Команда ${index + 1}`}
-				</div>
-
-				{team.map(player => (
-					<div class={[styles.subText]}>
-						{player}
-					</div>)
-				)}
-			</div>
-		)
 	}
 
 	public render() {
 		return (
-			<form>
-				<div class={styles.bigTitle}>
-					Команды
-				</div>
+			<Page title={'Команды'}>
+				{this.teams.length > 0
+					? this.teams?.map((team, index) => (
+						<Team
+							key={index}
+							team={team}
+							teamIndex={index}
+						/>
+					)) : <Block title={'Нет команд'} />
+				}
 
-				<div class={styles.block}>
-					<div class={styles.mainText}>
-						Число команд:{' '}
-						<span class={styles.highlightedText}>
-							{this.teamsCount}
-						</span>
-					</div>
-				</div>
-
-				{this.teams?.map((team, index) => this.renderTeam(team, index))}
-
-				<div class={styles.block}>
-					<button
-						class={styles.submitButton}
-						onClick={this.whenSubmit}
+				<Block>
+					<Button
+						spread
+						whenClick={this.whenSubmit}
 					>
-						Поехали
-					</button>
-				</div>
-			</form>
+						Дальше
+					</Button>
+				</Block>
+			</Page>
 		)
 	}
 }

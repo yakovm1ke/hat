@@ -1,7 +1,6 @@
+import { Block, Button, Page } from '@/components/ui'
 import { RootModule, useStore } from '@/store/root'
 import { VueComponent, Component } from '@/types'
-
-import styles from './index.module.css'
 
 @Component
 export class ReadyView extends VueComponent {
@@ -16,6 +15,10 @@ export class ReadyView extends VueComponent {
 		return this.store.game.currentTeamIndex
 	}
 
+	private get currentTeamSting(): string | void {
+		return this.store.game.currentTeam?.join(', ')
+	}
+
 	private get currentTeam() {
 		return this.store.game.currentTeam
 	}
@@ -24,81 +27,62 @@ export class ReadyView extends VueComponent {
 		return this.store.game.currentPlayer
 	}
 
-	private whenClick() {
+	private get remainedWords() {
+		return this.store.words.remainedWords
+	}
+
+	private get currentTeamGuessedWords() {
+		return this.store.game.currentTeamGuessedWords
+	}
+
+	private whenClickHandler() {
 		this.$router.push({
-			path: '/move',
+			name: 'move',
 		})
 	}
 
 	public render() {
 		return (
-			<div>
-				<div class={styles.bigTitle}>
-					Готовы?
-				</div>
+			<Page title={'Готовы?'}>
+				<Block title={'Этап'}>
+					{this.stage}
+				</Block>
 
-				<div class={styles.block}>
-					<div class={styles.mainText}>
-						Этап
-					</div>
-					<div class={[styles.subText, styles.highlightedText]}>
-						{this.stage}
-					</div>
-				</div>
+				<Block title={'Играет'}>
+					Команда {this.currentTeamIndex + 1}
+				</Block>
 
-				<div class={styles.block}>
-					<div class={styles.mainText}>
-						Играет
-					</div>
-					<div class={[styles.subText, styles.highlightedText]}>
-						{this.currentTeamIndex
-							? this.currentTeamIndex + 1
-							: 'Пусто'
-						}
-					</div>
-				</div>
-
-				<div class={styles.block}>
-					<div class={styles.mainText}>
-						Участники
-					</div>
-					{this.currentTeam
-						? this.currentTeam.map(player => <div class={styles.subText}>{player}</div>)
-						: <div class={styles.subText}>Пусто</div>
+				<Block title={'Участники'}>
+					{this.currentTeamSting
+						? this.currentTeamSting
+						: 'Пусто'
 					}
-				</div>
+				</Block>
 
-				<div class={styles.block}>
-					<div class={styles.mainText}>
-						Начинает
-					</div>
+				<Block title={'Начинает'}>
 					{this.currentPlayer
-						? <div class={styles.subText}>{this.currentPlayer}</div>
-						: <div class={styles.subText}>Пусто</div>
+						? this.currentPlayer
+						: 'Пусто'
 					}
-				</div>
+				</Block>
 
-				<div class={styles.block}>
-					<div class={styles.mainText}>
-						Осталось слов
-					</div>
-				</div>
+				<Block title={'Осталось слов'}>
+					{this.remainedWords.length}
+				</Block>
 
-				<div class={styles.block}>
-					<div class={styles.mainText}>
-						Команда угадала
-					</div>
-				</div>
+				<Block title={'Команда угадала'}>
+					{this.currentTeamGuessedWords?.length}
+				</Block>
 
-				<div class={styles.block}>
-					<button
-						class={styles.submitButton}
-						onClick={this.whenClick}
+				<Block>
+					<Button
+						spread
+						whenClick={this.whenClickHandler}
 					>
 						Играть
-					</button>
-				</div>
-			</div>
+					</Button>
+				</Block>
+			</Page>
 		)
 	}
 }

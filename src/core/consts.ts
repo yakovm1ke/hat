@@ -1,14 +1,17 @@
 export enum LocalStorageItems {
-	TotalPlayers = 'totalPlayers',
+	// Start
+	PlayersNumber = 'playersNumber',
 	TeamsSet = 'teamsSet',
+	WordsNumber = 'wordsNumber',
 	Players = 'players',
 	Words = 'words',
 	Teams = 'teams',
 	ShuffledWords = 'shuffledWords'
 }
 
-export enum Stages {
+export enum Stage {
 	Explanation = 'Объяснение',
 	Pantomime = 'Пантомима',
-	OneWord = 'Одно слово'
+	OneWord = 'Одно слово',
+	GameOver = 'Конец Игры',
 }

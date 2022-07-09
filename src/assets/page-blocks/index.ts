@@ -1,1 +1,0 @@
-export {mainPageBlocks} from './main'

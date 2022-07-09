@@ -1,0 +1,48 @@
+.row {
+	display: flex;
+	width: 100%;
+	box-sizing: border-box;
+	gap: var(--sizeSmall);
+}
+
+.counterButtons {
+	display: flex;
+	min-width: 100px;
+	flex-direction: column;
+	gap: var(--sizeSmall);
+}
+
+.incrementButton {
+	border: var(--border);
+	border-color: var(--blue);
+	background-color: none;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.decrementButton {
+	border: var(--border);
+	border-color: var(--red);
+	background-color: none;
+	border-bottom-right-radius: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.value {
+	display: flex;
+	box-sizing: border-box;
+	flex-grow: 1;
+	align-items: center;
+	justify-content: center;
+	border: var(--border);
+	border-radius: var(--sizeNormal);
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+	font-size: var(--pageTitleFontSize);
+}
+
+.totalValue {
+	color: var(--gray);
+}

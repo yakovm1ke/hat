@@ -6,18 +6,19 @@ import { BaseModule } from '../common/base-module'
 export class WordsModule extends BaseModule {
 
 	@State()
-	wordsCount = 4
+	wordsNumber = 4
 
 	@Mutation()
-	setWordsCount(value: number) {
+	setWordsNumber(value: number) {
 		if (value < 4) return
 		if (value > 6) return
-		this.wordsCount = value
+
+		this.wordsNumber = value
 	}
 
 	@Getter()
 	get totalWords() {
-		return this.root.players.totalPlayers * this.wordsCount
+		return this.root.players.playersNumber * this.wordsNumber
 	}
 
 	@State()
@@ -32,10 +33,27 @@ export class WordsModule extends BaseModule {
 	}
 
 	@State()
-	shuffledWords: string[] = []
+	remainedWords: string[] = []
 
 	@Mutation()
-	shuffleWords() {
-		this.shuffledWords = shuffle(this.words)
+	setRemainedWords(value: string[]) {
+		this.remainedWords = [...value]
+	}
+
+	@Mutation()
+	shuffleRemainedWords() {
+		this.remainedWords = shuffle([...this.remainedWords])
+	}
+
+	@State()
+	guessedWords: string[][] = []
+
+	@Mutation()
+	addGuessedWord() {
+		const teamIndex = this.root.game.currentTeamIndex
+
+		Array.isArray(this.guessedWords[teamIndex])
+			? this.guessedWords[teamIndex].push(...this.remainedWords.splice(0, 1))
+			: this.guessedWords[teamIndex] = [...this.remainedWords.splice(0, 1)]
 	}
 }

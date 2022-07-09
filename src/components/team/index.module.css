@@ -1,0 +1,15 @@
+.team {
+	padding: var(--sizeNormal);
+	border: var(--border);
+	border-radius: var(--sizeNormal);
+}
+
+.players {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sizeExtraSmall);
+}
+
+.player {
+	color: var(--gray);
+}

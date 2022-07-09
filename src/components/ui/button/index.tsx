@@ -4,7 +4,6 @@ import { VNode } from 'vue'
 import styles from './index.module.css'
 
 export interface ButtonProps {
-	label?: string | VNode
 	leftContent?: string | VNode
 	rightContent?: string | VNode
 	disabled?: boolean
@@ -15,8 +14,6 @@ export interface ButtonProps {
 
 @Component<Button>({})
 export class Button extends VueComponent<ButtonProps> {
-
-	@Prop() private readonly label: ButtonProps['label']
 
 	@Prop() private readonly leftContent: ButtonProps['leftContent']
 
@@ -60,17 +57,17 @@ export class Button extends VueComponent<ButtonProps> {
 				onClick={this.whenClick}
 			>
 				{this.leftContent && (
-					<div class={styles.buttonItem}>
+					<div>
 						{this.leftContent}
 					</div>
 				)}
-				{this.label && (
-					<div class={styles.buttonItem}>
-						{this.label}
+				{this.$slots.default && (
+					<div>
+						{this.$slots.default}
 					</div>
 				)}
 				{this.rightContent && (
-					<div class={styles.buttonItem}>
+					<div>
 						{this.rightContent}
 					</div>
 				)}

@@ -1,38 +1,33 @@
+import { Block, Button, Page } from '@/components/ui'
 import { VueComponent, Component } from '@/types'
+import { VNode } from 'vue'
 
-import styles from './index.module.css'
+@Component<ErrorView>({})
 
-@Component
 export class ErrorView extends VueComponent {
 
 	private whenClickHandler() {
 		this.$router.push({
-			path: '/'
+			name: 'home',
 		})
 	}
 
-	public render() {
+	public render(): VNode {
 		return (
-			<div>
-				<div class={styles.bigTitle}>
-					Ошибка
-				</div>
+			<Page
+				title={'Ошибка'}
+			>
+				<Block title={'Что-то пошло не так, попробуйте начать сначала'} />
 
-				<div class={styles.block}>
-					<div class={styles.mainText}>
-						Что-то пошло не так, попробуйте начать сначала
-					</div>
-				</div>
-
-				<div class={styles.block}>
-					<button
-						class={styles.submitButton}
-						onClick={this.whenClickHandler}
+				<Block>
+					<Button
+						spread
+						whenClick={this.whenClickHandler}
 					>
 						В начало
-					</button>
-				</div>
-			</div>
+					</Button>
+				</Block>
+			</Page>
 		)
 	}
 }

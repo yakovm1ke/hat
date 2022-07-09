@@ -7,6 +7,8 @@
 	--green: #2cb67b;
 	--black: #16161a;
 	--purple: #7f5af0;
+	--red: #ec3b3b;
+	--blue: #3b58e7;
 	--sizeExtraSmall: 4px;
 	--sizeSmall: 8px;
 	--sizeNormal: 16px;
@@ -18,7 +20,8 @@
 	--buttonOutline: 2px;
 	--buttonBrightness: brightness(0.9);
 	--buttonTransform: scale(0.95);
-	--buttonBoxShadow: 0 0 6px var(--gray);
+	--buttonBoxShadow: 0 0 20px var(--darkGray);
+	--border: 4px solid var(--darkGray);
 	--disabledGrayscale: grayscale(0.5);
 	--disabledOpacity: 0.5;
 	--transitionFast: 50ms;

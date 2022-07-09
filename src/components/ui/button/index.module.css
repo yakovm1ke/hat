@@ -1,11 +1,10 @@
 .button {
 	display: flex;
 	min-width: var(--sizeExtraBig);
-	height: calc(var(--sizeBig) + 2 * var(--sizeNormal));
 	box-sizing: border-box;
 	align-items: center;
 	justify-content: center;
-	padding: var(--sizeNormal);
+	padding: var(--sizeBig) calc(var(--sizeNormal) * 2);
 	border: none;
 	background-color: var(--purple);
 	border-radius: var(--sizeNormal);
@@ -54,7 +53,7 @@
 }
 
 .outlineButton {
-	border: var(--buttonOutline) solid var(--purple);
+	border: var(--border);
 	background: none;
 }
 

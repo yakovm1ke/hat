@@ -6,13 +6,14 @@ import { BaseModule } from '../common/base-module'
 export class PlayersModule extends BaseModule {
 
 	@State()
-	totalPlayers = 4
+	playersNumber = 4
 
 	@Mutation()
-	setPlayersCount(value: number) {
+	setPlayersNumber(value: number) {
 		if (value < 4) return
 		if (value > 9) return
-		this.totalPlayers = value
+
+		this.playersNumber = value
 	}
 
 	@State()
@@ -31,14 +32,6 @@ export class PlayersModule extends BaseModule {
 
 	@Mutation()
 	shufflePlayers() {
-		this.shuffledPlayers = shuffle(this.players)
-	}
-
-	@State()
-	currentInputPlayer = 0
-
-	@Mutation()
-	incrementCurrentInputPlayer() {
-		this.currentInputPlayer++
+		this.shuffledPlayers = shuffle([...this.players])
 	}
 }

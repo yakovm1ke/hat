@@ -1,64 +1,66 @@
-import {VueComponent, Component, Watch} from '@/types'
+import { VueComponent, Component, Watch } from '@/types'
 import { ITeamsSet } from '@/store/modules/teams'
-
-import styles from './index.module.css'
 import { RootModule, useStore } from '@/store/root'
+import { Button } from '@/components/ui'
+import styles from './index.module.css'
 
 @Component
 export class SelectTeam extends VueComponent {
 
 	private readonly store = useStore<RootModule>(this.$store)
 
-	private get totalPlayers() {
-		return this.store.players.totalPlayers
+	private get playersNumber() {
+		return this.store.players.playersNumber
 	}
 
 	private get teamsSet() {
 		return this.store.teams.teamsSet
 	}
 
-	private set teamsSet(value: ITeamsSet | null) {
+	private set teamsSet(value) {
 		this.store.teams.setTeamsSet(value)
 	}
 
-	private get teamsSets() {
-		return this.store.teams.teamsSets
+	private get teamsSetOptions() {
+		return this.store.teams.teamsSetOptions
 	}
 
 	private isSelected(teamSet: ITeamsSet) {
 		return this.teamsSet?.length === teamSet.length
 	}
 
-	@Watch('totalPlayers')
+	@Watch('playersNumber')
 	private resetTeamsSet() {
 		this.teamsSet = null
 	}
 
-	public renderTeams(teamsSet: ITeamsSet) {
+	// TODO переделать множественно число игроков, игрока
+	private renderTeams(teamsSet: ITeamsSet) {
 		return (
-			<div
+			<Button
+				type={'ghost'}
+				whenClick={() => this.teamsSet = teamsSet}
 				class={[
 					styles.teamsSet,
-					{[styles.selected]: this.isSelected(teamsSet)}
+					{[styles.selected]: this.isSelected(teamsSet)},
 				]}
-				onClick={() => this.teamsSet = teamsSet}
 			>
 				<div class={styles.teamsNumber}>
 					{teamsSet.length}
 				</div>
 				<div class={styles.players}>
 					{teamsSet.map((players, index) => (
-						<div>{index + 1} команда: {players} игрока</div>
+						<div key={index}>{index + 1} команда: {players} игрока</div>
 					))}
 				</div>
-			</div>
+			</Button>
 		)
 	}
 
 	public render() {
 		return (
-			<div class={styles.teamsSets}>
-				{this.teamsSets.map((teamsSet) => (
+			<div class={styles.teamsSetOptions}>
+				{this.teamsSetOptions.map((teamsSet) => (
 					this.renderTeams(teamsSet)
 				))}
 			</div>

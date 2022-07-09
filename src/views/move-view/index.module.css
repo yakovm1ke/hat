@@ -1,0 +1,12 @@
+.currentWord {
+	display: flex;
+	width: 100%;
+	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
+	padding: var(--sizeBig);
+	background-color: var(--purple);
+	border-radius: var(--sizeNormal);
+	color: var(--white);
+	font-size: var(--sizeExtraBig);
+}

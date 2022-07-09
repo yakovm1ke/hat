@@ -1,0 +1,25 @@
+.input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: var(--sizeNormal);
+	border: var(--border);
+	border-color: var(--gray);
+	background-color: transparent;
+	border-radius: var(--sizeNormal);
+	color: var(--white);
+	font-size: var(--sizeBig);
+	outline: 0;
+	transition: var(--transitionNormal);
+}
+
+.input::placeholder {
+	color: var(--darkGray);
+}
+
+.input:focus {
+	box-shadow: var(--buttonBoxShadow);
+}
+
+.invalid {
+	border-color: var(--darkGray);
+}

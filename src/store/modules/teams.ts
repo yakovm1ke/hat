@@ -6,9 +6,17 @@ export type ITeam = string[]
 
 export class TeamsModule extends BaseModule {
 
+	@State()
+	teamsSet: ITeamsSet | null = null
+
+	@Mutation()
+	setTeamsSet(value: ITeamsSet | null) {
+		this.teamsSet = value
+	}
+
 	@Getter()
-	get teamsSets(): ITeamsSet[] {
-		switch(this.root.players.totalPlayers) {
+	get teamsSetOptions(): ITeamsSet[] {
+		switch(this.root.players.playersNumber) {
 		case 4:
 			return [[2, 2]]
 		case 5:
@@ -26,27 +34,23 @@ export class TeamsModule extends BaseModule {
 		}
 	}
 
-	@State()
-	teamsSet: ITeamsSet | null = null
-
-	@Mutation()
-	setTeamsSet(value: ITeamsSet | null) {
-		this.teamsSet = value
-	}
-
 	@Getter()
-	get teamsCount () {
+	get teamsNumber(): number {
 		return this.teamsSet?.length ?? 0
 	}
 
 	@Getter()
 	get teams(): ITeam[] {
-		if (!this.teamsSet || this.root.players.shuffledPlayers.length !== this.root.players.totalPlayers) return []
+		if (
+			!this.teamsSet
+			|| this.root.players.shuffledPlayers.length !== this.root.players.playersNumber
+		) return []
 
 		const teams: ITeam[] = []
+
 		let currentPlayer = 0
 
-		for (let i = 0; i < this.teamsCount; i++) {
+		for (let i = 0; i < this.teamsNumber; i++) {
 			teams[i] = []
 
 			for (let j = 0; j < this.teamsSet[i]; j++) {

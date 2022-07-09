@@ -1,0 +1,7 @@
+.ghostText {
+	color: var(--gray);
+}
+
+.input {
+	margin-top: var(--sizeNormal);
+}

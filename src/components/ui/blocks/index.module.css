@@ -1,5 +1,8 @@
 .block {
+	display: flex;
+	flex-direction: column;
 	margin-top: var(--sizeBig);
+	gap: var(--sizeExtraSmall);
 }
 
 .title {
@@ -7,6 +10,7 @@
 }
 
 .text {
+	color: var(--gray);
 	font-size: var(--blockTextFontSize);
 }
 
