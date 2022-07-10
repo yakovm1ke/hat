@@ -3,6 +3,8 @@ import Vue from 'vue'
 import { State, Mutation, Getter } from 'vuex-simple'
 import { BaseModule } from '../common/base-module'
 
+export type IWords = string[]
+
 export class WordsModule extends BaseModule {
 
 	@State()
@@ -22,7 +24,7 @@ export class WordsModule extends BaseModule {
 	}
 
 	@State()
-	words: string[] = []
+	words: IWords = []
 
 	@Mutation()
 	setWord({key, value}: {
@@ -32,8 +34,13 @@ export class WordsModule extends BaseModule {
 		Vue.set(this.words, key, value)
 	}
 
+	@Mutation()
+	setWords(value: IWords) {
+		this.words = value
+	}
+
 	@State()
-	remainedWords: string[] = []
+	remainedWords: IWords = []
 
 	@Mutation()
 	setRemainedWords(value: string[]) {
@@ -46,14 +53,14 @@ export class WordsModule extends BaseModule {
 	}
 
 	@State()
-	guessedWords: string[][] = []
+	guessedTeamsWords: IWords[] = []
 
 	@Mutation()
 	addGuessedWord() {
 		const teamIndex = this.root.game.currentTeamIndex
 
-		Array.isArray(this.guessedWords[teamIndex])
-			? this.guessedWords[teamIndex].push(...this.remainedWords.splice(0, 1))
-			: this.guessedWords[teamIndex] = [...this.remainedWords.splice(0, 1)]
+		Array.isArray(this.guessedTeamsWords[teamIndex])
+			? this.guessedTeamsWords[teamIndex].push(...this.remainedWords.splice(0, 1))
+			: this.guessedTeamsWords[teamIndex] = [...this.remainedWords.splice(0, 1)]
 	}
 }

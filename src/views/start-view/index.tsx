@@ -4,7 +4,7 @@ import { PlayersCounter } from '@/components/start/players-counter'
 import { SelectTeam } from '@/components/start/select-team'
 import { WordsCounter } from '@/components/start/words-counter'
 import { useStore, RootModule } from '@/store/root'
-import { Block, Button, Page, TextBlock } from '@/components/ui'
+import { Block, Button, Page } from '@/components/ui'
 
 @Component<StartView>({})
 

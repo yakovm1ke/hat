@@ -1,6 +1,6 @@
 export { Button } from './button'
 export { Popup } from './popup'
-export { TextBlockProps, TextBlock, IContentItem } from './blocks/text-block'
+export { TextBlock, IContentItem, TextBlockProps } from './blocks/text-block'
 export { Block } from './blocks/block'
 export { Page } from './page'
 export { Counter } from './counter'

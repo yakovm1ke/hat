@@ -1,4 +1,4 @@
-import { Stage } from '@/core/consts'
+import { EStage } from '@/core/consts'
 import { Getter, Mutation, State } from 'vuex-simple'
 import { BaseModule } from '../common/base-module'
 import { ITeam } from './teams'
@@ -6,10 +6,10 @@ import { ITeam } from './teams'
 export class GameModule extends BaseModule {
 
 	@State()
-	stage = Stage.Explanation
+	stage = EStage.Explanation
 
 	@Mutation()
-	setStage(value: Stage) {
+	setStage(value: EStage) {
 		this.stage = value
 		this.resetMove()
 	}
@@ -17,14 +17,11 @@ export class GameModule extends BaseModule {
 	@Mutation()
 	nextStage() {
 		switch(this.stage) {
-		case(Stage.Explanation):
-			this.setStage(Stage.Pantomime)
+		case(EStage.Explanation):
+			this.setStage(EStage.Pantomime)
 			break
-		case(Stage.Pantomime):
-			this.setStage(Stage.OneWord)
-			break
-		case(Stage.OneWord):
-			this.setStage(Stage.GameOver)
+		case(EStage.Pantomime):
+			this.setStage(EStage.OneWord)
 			break
 		default:
 			break
@@ -33,6 +30,11 @@ export class GameModule extends BaseModule {
 
 	@State()
 	move = 0
+
+	@Mutation()
+	setMove(value: number) {
+		this.move = value
+	}
 
 	@Mutation()
 	incrementMove() {
@@ -93,6 +95,6 @@ export class GameModule extends BaseModule {
 
 	@Getter()
 	get currentTeamGuessedWords(): string[] {
-		return this.root.words.guessedWords?.[this.currentTeamIndex] ?? []
+		return this.root.words.guessedTeamsWords?.[this.currentTeamIndex] ?? []
 	}
 }

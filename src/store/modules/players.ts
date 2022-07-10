@@ -3,6 +3,8 @@ import Vue from 'vue'
 import { State, Mutation } from 'vuex-simple'
 import { BaseModule } from '../common/base-module'
 
+export type IPlayers = string[]
+
 export class PlayersModule extends BaseModule {
 
 	@State()
@@ -17,7 +19,7 @@ export class PlayersModule extends BaseModule {
 	}
 
 	@State()
-	players: string[] = []
+	players: IPlayers = []
 
 	@Mutation()
 	setPlayer({key, value}: {
@@ -27,8 +29,18 @@ export class PlayersModule extends BaseModule {
 		Vue.set(this.players, key, value)
 	}
 
+	@Mutation()
+	setPlayers(value: IPlayers) {
+		this.players = value
+	}
+
 	@State()
-	shuffledPlayers: string[] = []
+	shuffledPlayers: IPlayers = []
+
+	@Mutation()
+	setShuffledPlayers(value: IPlayers) {
+		this.shuffledPlayers = value
+	}
 
 	@Mutation()
 	shufflePlayers() {

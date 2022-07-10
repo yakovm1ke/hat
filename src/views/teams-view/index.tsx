@@ -22,6 +22,8 @@ export class TeamsView extends VueComponent {
 	}
 
 	private whenSubmit() {
+		// TODO set teams and words to local storage
+
 		this.$router.push({
 			name: 'ready',
 		})
