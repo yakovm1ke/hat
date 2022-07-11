@@ -1,7 +1,8 @@
-import { VueComponent, Component } from '@/types'
+import { Component } from '@/types'
 import {RootModule, useStore} from '@/store/root'
 import { Block, Button, Page } from '@/components/ui'
 import { Team } from '@/components/team'
+import { LocalStorageMixin } from '@/mixins/local-storage-mixin'
 
 @Component<TeamsView>({
 	mounted() {
@@ -13,7 +14,7 @@ import { Team } from '@/components/team'
 	},
 })
 
-export class TeamsView extends VueComponent {
+export class TeamsView extends LocalStorageMixin {
 
 	private readonly teamsModule = useStore<RootModule>(this.$store).teams
 
@@ -22,7 +23,7 @@ export class TeamsView extends VueComponent {
 	}
 
 	private whenSubmit() {
-		// TODO set teams and words to local storage
+		this.setGameConfig()
 
 		this.$router.push({
 			name: 'ready',

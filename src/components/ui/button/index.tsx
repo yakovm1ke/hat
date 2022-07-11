@@ -54,7 +54,7 @@ export class Button extends VueComponent<ButtonProps> {
 			<button
 				class={this.buttonClass}
 				disabled={this.disabled}
-				onClick={this.whenClick}
+				onClick={this.whenClick ? this.whenClick : () => {}}
 			>
 				{this.leftContent && (
 					<div>

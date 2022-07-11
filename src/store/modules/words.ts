@@ -56,6 +56,17 @@ export class WordsModule extends BaseModule {
 	guessedTeamsWords: IWords[] = []
 
 	@Mutation()
+	setGuessedTeamsWords(value: IWords[]) {
+		this.guessedTeamsWords = value
+	}
+
+	@Mutation()
+	resetWordsWhenStageChange() {
+		this.setRemainedWords(this.words)
+		this.shuffleRemainedWords()
+	}
+
+	@Mutation()
 	addGuessedWord() {
 		const teamIndex = this.root.game.currentTeamIndex
 

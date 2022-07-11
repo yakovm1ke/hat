@@ -1,3 +1,4 @@
+import { EStage, MOVE_TIME_IN_SECONDS } from '@/core/consts'
 import {
 	ILocalStorageGameConfig,
 	ILocalStorageMoveConfig,
@@ -5,6 +6,8 @@ import {
 	setMoveConfigToLocalStorage,
 	getGameConfigFromLocalStorage,
 	getMoveConfigFromLocalStorage,
+	removeGameConfigFromLocalStorage,
+	removeMoveConfigFromLocalStorage,
 } from '@/helpers/local-storage'
 import { RootModule, useStore } from '@/store/root'
 import { VueComponent, Component } from '@/types'
@@ -13,65 +16,89 @@ import { VueComponent, Component } from '@/types'
 
 export class LocalStorageMixin extends VueComponent {
 
-	private readonly store = useStore<RootModule>(this.$store)
+	protected readonly store = useStore<RootModule>(this.$store)
 
-	private get teamsSet() {
+	protected get teamsSet() {
 		return this.store.teams.teamsSet
 	}
 
-	private set teamsSet(value) {
+	protected set teamsSet(value) {
 		this.store.teams.setTeamsSet(value)
 	}
 
-	private get shuffledPlayers() {
+	protected get shuffledPlayers() {
 		return this.store.players.shuffledPlayers
 	}
 
-	private set shuffledPlayers(value) {
+	protected set shuffledPlayers(value) {
 		this.store.players.setShuffledPlayers(value)
 	}
 
-	private get words() {
+	protected get words() {
 		return this.store.words.words
 	}
 
-	private set words(value) {
+	protected set words(value) {
 		this.store.words.setWords(value)
 	}
 
-	private get players() {
+	protected get players() {
 		return this.store.players.players
 	}
 
-	private set players(value) {
+	protected set players(value) {
 		this.store.players.setPlayers(value)
 	}
 
-	private get move() {
+	protected get move() {
 		return this.store.game.move
 	}
 
-	private set move(value) {
+	protected set move(value) {
 		this.store.game.setMove(value)
 	}
 
-	private get stage() {
+	protected get stage() {
 		return this.store.game.stage
 	}
 
-	private set stage(value) {
+	protected set stage(value) {
 		this.store.game.setStage(value)
 	}
 
-	private get remainedWords() {
+	protected get remainedWords() {
 		return this.store.words.remainedWords
 	}
 
-	private set remainedWords(value) {
+	protected set remainedWords(value) {
 		this.store.words.setRemainedWords(value)
 	}
 
-	private setGameConfig() {
+	protected get timeLeft() {
+		return this.store.game.timeLeft
+	}
+
+	protected set timeLeft(value) {
+		this.store.game.setTimeLeft(value)
+	}
+
+	protected get timerId() {
+		return this.store.game.timerId
+	}
+
+	protected set timerId(value) {
+		this.store.game.setTimerId(value)
+	}
+
+	protected get guessedTeamsWords() {
+		return this.store.words.guessedTeamsWords
+	}
+
+	protected set guessedTeamsWords(value) {
+		this.store.words.setGuessedTeamsWords(value)
+	}
+
+	protected setGameConfig() {
 		if (
 			this.words.length === 0
 			|| this.players.length === 0
@@ -89,7 +116,7 @@ export class LocalStorageMixin extends VueComponent {
 		setGameConfigToLocalStorage(config)
 	}
 
-	private getGameConfig() {
+	protected getGameConfig() {
 		const config =  getGameConfigFromLocalStorage()
 
 		if (config === null) return
@@ -100,17 +127,24 @@ export class LocalStorageMixin extends VueComponent {
 		this.shuffledPlayers = config.shuffledPlayers
 	}
 
-	private setMoveConfig() {
+	protected setMoveConfigIfGameConfigExist() {
+		this.remainedWords = this.words
+		this.store.words.shuffleRemainedWords()
+	}
+
+	protected setMoveConfig() {
 		const config: ILocalStorageMoveConfig = {
 			move: this.move,
 			stage: this.stage,
 			remainedWords: this.remainedWords,
+			timeLeft: this.timeLeft,
+			guessedTeamsWords: this.guessedTeamsWords,
 		}
 
 		setMoveConfigToLocalStorage(config)
 	}
 
-	private getMoveConfig() {
+	protected getMoveConfig() {
 		const config =  getMoveConfigFromLocalStorage()
 
 		if (config === null) return
@@ -118,5 +152,25 @@ export class LocalStorageMixin extends VueComponent {
 		this.move = config.move
 		this.stage = config.stage
 		this.remainedWords = config.remainedWords
+		this.timeLeft = config.timeLeft
+		this.guessedTeamsWords = config.guessedTeamsWords
+	}
+
+	protected removeGameConfig() {
+		removeGameConfigFromLocalStorage()
+		this.players = []
+		this.teamsSet = null
+		this.words = []
+		this.shuffledPlayers = []
+	}
+
+	protected removeMoveConfig() {
+		removeMoveConfigFromLocalStorage()
+
+		this.move = 0
+		this.stage = EStage.Explanation
+		this.remainedWords = []
+		this.timeLeft = MOVE_TIME_IN_SECONDS
+		this.guessedTeamsWords = []
 	}
 }

@@ -14,6 +14,8 @@ export interface ILocalStorageMoveConfig {
 	stage: EStage
 	move: number
 	remainedWords: IWords
+	timeLeft: number
+	guessedTeamsWords: IWords[]
 }
 
 export const GAME_CONFIG_LS_NAME = 'gameConfig'
@@ -33,6 +35,10 @@ export const getGameConfigFromLocalStorage = (): ILocalStorageGameConfig | null 
 	)
 }
 
+export const removeGameConfigFromLocalStorage = () => {
+	localStorage.removeItem(GAME_CONFIG_LS_NAME)
+}
+
 export const setMoveConfigToLocalStorage = (config: ILocalStorageMoveConfig) => {
 	localStorage.setItem(MOVE_CONFIG_LS_NAME, JSON.stringify(config))
 }
@@ -45,4 +51,8 @@ export const getMoveConfigFromLocalStorage = (): ILocalStorageMoveConfig | null 
 			? JSON.parse(moveConfigJson)
 			: null
 	)
+}
+
+export const removeMoveConfigFromLocalStorage = () => {
+	localStorage.removeItem(MOVE_CONFIG_LS_NAME)
 }

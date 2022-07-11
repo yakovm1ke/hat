@@ -1,4 +1,4 @@
-import { EStage } from '@/core/consts'
+import { EStage, MOVE_TIME_IN_SECONDS } from '@/core/consts'
 import { Getter, Mutation, State } from 'vuex-simple'
 import { BaseModule } from '../common/base-module'
 import { ITeam } from './teams'
@@ -11,17 +11,21 @@ export class GameModule extends BaseModule {
 	@Mutation()
 	setStage(value: EStage) {
 		this.stage = value
-		this.resetMove()
 	}
 
 	@Mutation()
 	nextStage() {
+		this.root.words.resetWordsWhenStageChange()
+
 		switch(this.stage) {
 		case(EStage.Explanation):
 			this.setStage(EStage.Pantomime)
 			break
 		case(EStage.Pantomime):
 			this.setStage(EStage.OneWord)
+			break
+		case(EStage.OneWord):
+			this.setStage(EStage.GameOver)
 			break
 		default:
 			break
@@ -47,7 +51,15 @@ export class GameModule extends BaseModule {
 	}
 
 	@State()
-	timeLeft = 60
+	timerId: null | number = 0
+
+	@Mutation()
+	setTimerId(value: null | number) {
+		this.timerId = value
+	}
+
+	@State()
+	timeLeft = MOVE_TIME_IN_SECONDS
 
 	@Mutation()
 	setTimeLeft(value: number) {

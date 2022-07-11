@@ -7,7 +7,7 @@
 	height: 100%;
 	align-items: center;
 	justify-content: center;
-	backdrop-filter: blur(2px);
+	backdrop-filter: var(--blur-filter);
 	color: var(--black);
 }
 
@@ -16,25 +16,23 @@
 	width: 100%;
 	max-width: 500px;
 	box-sizing: border-box;
-	padding: 16px;
-	margin: 45px;
-	background-color: var(--white);
-	border-radius: 16px;
+	padding: var(--sizeNormal);
+	margin: var(--sizeNormal);
+	background-color: var(--darkGray);
+	border-radius: var(--sizeNormal);
+	color: var(--gray);
+	font-size: var(--blockTextFontSize);
 }
 
 .heading {
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
-	gap: 8px;
-}
-
-.title {
+	margin-bottom: var(--sizeNormal);
+	color: var(--white);
+	font-size: var(--blockTitleFontSize);
 	font-weight: bold;
-}
-
-.closeButton {
-	font-weight: bold;
+	gap: var(--sizeSmall);
 }
 
 .closeButton:hover {

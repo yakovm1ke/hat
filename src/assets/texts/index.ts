@@ -1,4 +1,5 @@
 import { TextBlockProps } from '@/components/ui'
+import { MOVE_TIME_IN_SECONDS } from '@/core/consts'
 
 export const instructions: TextBlockProps[] = [
 	{
@@ -42,7 +43,7 @@ export const instructions: TextBlockProps[] = [
 			isHtml: true,
 			text: `
 				<ul>
-					<li>На каждый ход выделяется по 60 секунд</li>
+					<li>На каждый ход выделяется по ${MOVE_TIME_IN_SECONDS} секунд</li>
 					<li>Каждый ход по очереди играет только одна команда</li>
 					<li>Пропускать слова не допускается</li>
 					<li>Если участник(ца) не успел(а) объяснить последнее слово, то ход переходит к следующей команде</li>

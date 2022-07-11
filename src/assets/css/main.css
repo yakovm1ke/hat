@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 :root {
 	--white: #fffffe;
@@ -14,7 +14,7 @@
 	--sizeNormal: 16px;
 	--sizeBig: 24px;
 	--sizeExtraBig: 32px;
-	--pageTitleFontSize: 64px;
+	--pageTitleFontSize: 48px;
 	--blockTitleFontSize: 24px;
 	--blockTextFontSize: 20px;
 	--buttonOutline: 2px;
@@ -27,9 +27,10 @@
 	--transitionFast: 50ms;
 	--transitionNormal: 250ms;
 	--transitionSlow: 500ms;
+	--blur-filter: blur(8px);
 
 	color: var(--white);
-	font-family: Roboto, sans-serif;
+	font-family: Montserrat, sans-serif;
 }
 
 ul {

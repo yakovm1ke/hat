@@ -4,6 +4,7 @@ import { WordsModule } from './modules/words'
 import { TeamsModule } from './modules/teams'
 import { PlayersModule } from './modules/players'
 import { GameModule } from './modules/game'
+import { ConfigurationsModule } from './modules/configurations'
 export { useStore } from 'vuex-simple'
 
 export class RootModule {
@@ -19,4 +20,7 @@ export class RootModule {
 
 	@Module()
 	public game = new GameModule(this)
+
+	@Module()
+	public configurations = new ConfigurationsModule(this)
 }
